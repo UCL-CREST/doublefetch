@@ -31,7 +31,7 @@ else
 fi
 
 echo Start analyzing...
-spatch -cocci_file pattern_match.cocci -D count=0 -dir ${testdir}
+spatch -cocci_file pattern_match_freebsd.cocci -D count=0 -dir ${testdir}
 #--disable-worth-trying-opt
 echo Finished analyzing.
 python copy_files.py
