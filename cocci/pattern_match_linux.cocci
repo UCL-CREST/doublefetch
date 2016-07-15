@@ -48,8 +48,8 @@ def post_match_process(p1,p2,src,ptr,count):
 		return
 	if ptr_str.find("-") != -1 and ptr_str.find("->") == -1:
 		return
-	# remove false matching of src ===> (int*)src 
-	if src_str.find("(") != -1 or ptr_str.find("(") != -1:
+	# remove false matching of src ===> (int*)src , but leave function call like u64_to_uptr(ctl_sccb.sccb)
+	if src_str.find("(") == 0 or ptr_str.find("(") == 0:
 		return
 
 	if count:
