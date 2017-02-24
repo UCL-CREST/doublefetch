@@ -1,0 +1,7 @@
+A tool used to automatically patch the double-fetch bugs.
+
+How to use?
+
+1. Put buggy files to bug_files/
+2. Run ./start.sh
+3. Pathced files will be stored at patched_files/
