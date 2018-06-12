@@ -12,10 +12,8 @@ else
 	echo Make outcome dir...
 fi
 
-if test -d ${testdir}
-then 
-	pass
-else
+if ! test -d ${testdir}
+then
 	mkdir ${testdir}
 	echo Make  testdir...
 fi
