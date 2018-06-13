@@ -5,7 +5,7 @@
 
 count = 0
 
-def print_and_log(filename,first,second,count):
+def print_and_log(filename, first, second, count):
 	print "No. ", count, " file: ", filename
 	print "--first fetch: line ",first
 	print "--second fetch: line ",second
@@ -18,7 +18,7 @@ def print_and_log(filename,first,second,count):
 	logfile.write("-------------------------------\n")
 	logfile.close()
 
-def post_match_process(p1,p2,src,ptr):
+def post_match_process(p1, p2, src, ptr):
 	global count
 	filename = p1[0].file
 	first = p1[0].line
@@ -49,7 +49,7 @@ def post_match_process(p1,p2,src,ptr):
 	if src_str.find("(") == 0 or ptr_str.find("(") == 0:
 		return
 
-	print_and_log(filename, first, second, count)
+	print_and_log(filename, first, second, str(count))
 	count += 1
 	return
 
@@ -120,7 +120,7 @@ print "src1:", str(s1)
 if p11 and p12:
 	coccilib.report.print_report(p11[0],"rule1 First fetch")
 	coccilib.report.print_report(p12[0],"rule1 Second fetch")	
-	post_match_process(p11, p12, s1, s1, count)
+	post_match_process(p11, p12, s1, s1)
 
 //--------------------------------------- case 2: ptr = src at beginning, ptr first
 @ rule2 disable drop_cast exists @
@@ -195,7 +195,7 @@ print "ptr2:", str(p2)
 if p21 and p22:
 	coccilib.report.print_report(p21[0],"rule2 First fetch")
 	coccilib.report.print_report(p22[0],"rule2 Second fetch")
-	post_match_process(p21, p22, s2, p2, count)
+	post_match_process(p21, p22, s2, p2)
 
 //--------------------------------------- case 3: ptr = src at beginning, src first
 @ rule3 disable drop_cast exists @
@@ -270,7 +270,7 @@ print "ptr3:", str(p3)
 if p31 and p32:
 	coccilib.report.print_report(p31[0],"rule3 First fetch")
 	coccilib.report.print_report(p32[0],"rule3 Second fetch")
-	post_match_process(p31, p32, s3, p3, count)
+	post_match_process(p31, p32, s3, p3)
 
 //----------------------------------- case 4: ptr = src at middle
 
@@ -355,7 +355,7 @@ print "ptr4:", str(p4)
 if p41 and p42:
 	coccilib.report.print_report(p41[0],"rule4 First fetch")
 	coccilib.report.print_report(p42[0],"rule4 Second fetch")
-	post_match_process(p41, p42, s4, p4, count)
+	post_match_process(p41, p42, s4, p4)
 
 //----------------------------------- case 5: first element, then ptr, copy from structure
 @ rule5 disable drop_cast exists @
@@ -432,7 +432,7 @@ print "e5:", str(e5)
 if p51 and p52:
 	coccilib.report.print_report(p51[0],"rule5 First fetch")
 	coccilib.report.print_report(p52[0],"rule5 Second fetch")
-	post_match_process(p51, p52, s5, e5, count)
+	post_match_process(p51, p52, s5, e5)
 
 //----------------------------------- case 6: first element, then ptr, copy from pointer
 @ rule6 disable drop_cast exists @
@@ -507,4 +507,4 @@ print "e6:", str(e6)
 if p61 and p62:
 	coccilib.report.print_report(p61[0],"rule6 First fetch")
 	coccilib.report.print_report(p62[0],"rule6 Second fetch")
-	post_match_process(p61, p62, s6, e6, count)
+	post_match_process(p61, p62, s6, e6)
